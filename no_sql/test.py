@@ -23,7 +23,7 @@ except:
 # store = {}
 
 def make_key(customer_id):
-    return ('OTUS', 'NoSQL_HW', customer_id)
+    return ('test', 'NoSQL_HW', customer_id)
 
 def add_customer(customer_id, phone_number, lifetime_value):
     try:
