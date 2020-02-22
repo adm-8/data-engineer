@@ -41,14 +41,30 @@ def add_customer(customer_id, phone_number, lifetime_value):
     except ex.RecordError as e:
         print("Error: {0} [{1}]".format(e.msg, e.code))
         
-    #store[customer_id] = {'phone': phone_number, 'ltv': lifetime_value}
 
 def get_ltv_by_id(customer_id):
-    item = store.get(customer_id, {})
-    if (item == {}):
-        logging.error('Requested non-existent customer ' + str(customer_id))
-    else:
-        return item.get('ltv')
+    try:
+        # Make a key
+        key = make_key(customer_id)
+        
+        # Getting data by id
+        (key, meta, bins) = client.get(key)
+        print(key)
+        print('--------------------------')
+        print(meta)
+        print('--------------------------')
+        print(bins)
+        '''
+        item = store.get(customer_id, {})
+        if (item == {}):
+            logging.error('Requested non-existent customer ' + str(customer_id))
+        else:
+            return item.get('ltv')
+        '''
+    except ex.RecordError as e:
+        print("Error: {0} [{1}]".format(e.msg, e.code))
+        
+
 
 def get_ltv_by_phone(phone_number):
     for v in store.values():
@@ -63,3 +79,6 @@ for i in range(0,1000):
 for i in range(0,1000):
     assert (i + 1 == get_ltv_by_id(i)), "No LTV by ID " + str(i)
     assert (i + 1 == get_ltv_by_phone(i)), "No LTV by phone " + str(i)
+    
+# Closing connection
+client.close()
