@@ -20,10 +20,24 @@ except:
 
 ### OLD Variant
 
-store = {}
+# store = {}
+
+def make_key(customer_id):
+    return ('OTUS', 'NoSQL_HW', customer_id)
 
 def add_customer(customer_id, phone_number, lifetime_value):
-    store[customer_id] = {'phone': phone_number, 'ltv': lifetime_value}
+    try:
+        # Make a key
+        key = make_key(customer_id)
+        # Write a record
+        client.put(key, {
+            'phone': phone_number,
+            'ltv': lifetime_value
+        })
+    except ex.RecordError as e:
+        print("Error: {0} [{1}]".format(e.msg, e.code))
+        
+    #store[customer_id] = {'phone': phone_number, 'ltv': lifetime_value}
 
 def get_ltv_by_id(customer_id):
     item = store.get(customer_id, {})
