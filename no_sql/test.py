@@ -50,7 +50,6 @@ def get_ltv_by_id(customer_id):
         # Getting data by id
         (key, meta, item) = client.get(key)
 
-        item = store.get(customer_id, {})
         if (item == {}):
             logging.error('Requested non-existent customer ' + str(customer_id))
         else:
