@@ -29,11 +29,15 @@ def add_customer(customer_id, phone_number, lifetime_value):
     try:
         # Make a key
         key = make_key(customer_id)
+        
         # Write a record
         client.put(key, {
             'phone': phone_number,
             'ltv': lifetime_value
         })
+        
+        print("Row for customer {0} with phone_number {1} and lifetime_value {2} added successfully!".format(customer_id, phone_number, lifetime_value))
+        
     except ex.RecordError as e:
         print("Error: {0} [{1}]".format(e.msg, e.code))
         
