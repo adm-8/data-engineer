@@ -48,19 +48,14 @@ def get_ltv_by_id(customer_id):
         key = make_key(customer_id)
         
         # Getting data by id
-        (key, meta, bins) = client.get(key)
-        print(key)
-        print('--------------------------')
-        print(meta)
-        print('--------------------------')
-        print(bins)
-        '''
+        (key, meta, item) = client.get(key)
+
         item = store.get(customer_id, {})
         if (item == {}):
             logging.error('Requested non-existent customer ' + str(customer_id))
         else:
             return item.get('ltv')
-        '''
+     
     except ex.RecordError as e:
         print("Error: {0} [{1}]".format(e.msg, e.code))
         
