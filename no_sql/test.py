@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
-import logging
-
-# import the module
 import aerospike
+import logging
+from aerospike import predicates as p
+import pprint
+
 
 # Configure the client
 config = {
@@ -18,12 +19,11 @@ except:
   print("failed to connect to the cluster with", config['hosts'])
   sys.exit(1)
 
-### OLD Variant
-
-# store = {}
+NAMESPACE = 'test'
+TABLE = 'NoSQL_HW'
 
 def make_key(customer_id):
-    return ('test', 'NoSQL_HW', customer_id)
+    return (NAMESPACE, TABLE, customer_id)
 
 def add_customer(customer_id, phone_number, lifetime_value):
     try:
@@ -61,6 +61,16 @@ def get_ltv_by_id(customer_id):
 
 
 def get_ltv_by_phone(phone_number):
+    
+    query = client.query(NAMESPACE, TABLE)
+    query.select('phone', 'ltv')
+    query.where(p.equals('phone', phone_number))
+    records = query.results( {'total_timeout':2000})
+    
+    
+    pp = pprint.PrettyPrinter(indent=2)
+    pp.pprint(records)
+    
     for v in store.values():
         if (v['phone'] == phone_number):
             return v['ltv']
