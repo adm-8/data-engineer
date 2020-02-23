@@ -65,13 +65,12 @@ def get_ltv_by_phone(phone_number):
     query = client.query(NAMESPACE, TABLE)
     query.select('phone', 'ltv')
     query.where(p.equals('phone', phone_number))
-    records = query.results( {'total_timeout':2000})
-    print(records)
+    result = query.results( {'total_timeout':2000})
+   
+    key, metadata, bins = result
+    print(bins)
+    return bins['ltv']
     
-    
-    for v in store.values():
-        if (v['phone'] == phone_number):
-            return v['ltv']
     logging.error('Requested phone number is not found ' + str(phone_number))
 
 for i in range(0,1000):
