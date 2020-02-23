@@ -20,10 +20,12 @@ except:
   sys.exit(1)
 
 NAMESPACE = 'test'
-TABLE = 'NoSQL_HW_ANDREEVDS'
+SET = 'NoSQL_HW_ANDREEVDS'
+
+client.index_integer_create(NAMESPACE, SET, 'phone', 'ix_phone')
 
 def make_key(customer_id):
-    return (NAMESPACE, TABLE, customer_id)
+    return (NAMESPACE, SET, customer_id)
 
 def add_customer(customer_id, phone_number, lifetime_value):
     try:
@@ -61,7 +63,7 @@ def get_ltv_by_id(customer_id):
 
 def get_ltv_by_phone(phone_number):
  
-    query = client.query(NAMESPACE, TABLE)
+    query = client.query(NAMESPACE, SET)
     query.select('phone', 'ltv')
     query.where(p.equals('phone', phone_number))
     result = query.results( {'total_timeout':2000})
