@@ -66,12 +66,12 @@ def get_ltv_by_phone(phone_number):
     query.select('phone', 'ltv')
     query.where(p.equals('phone', phone_number))
     result = query.results( {'total_timeout':2000})
-    print(result)
-    #key, metadata, bins = result
-    #print(bins)
+    
+    key, metadata, bins = result
+    print(bins)
     #return bins['ltv']
     
-    logging.error('Requested phone number is not found ' + str(phone_number))
+    #logging.error('Requested phone number is not found ' + str(phone_number))
 
 for i in range(0,1000):
     add_customer(i,i,i + 1)
