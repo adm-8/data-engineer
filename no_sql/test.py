@@ -22,7 +22,8 @@ except:
 NAMESPACE = 'test'
 SET = 'NoSQL_HW_ANDREEVDS'
 
-client.index_integer_create(NAMESPACE, SET, 'phone', 'ix_phone')
+try:
+    client.index_integer_create(NAMESPACE, SET, 'phone', 'ix_phone')
 
 def make_key(customer_id):
     return (NAMESPACE, SET, customer_id)
