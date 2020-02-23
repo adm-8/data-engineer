@@ -20,7 +20,7 @@ except:
   sys.exit(1)
 
 NAMESPACE = 'test'
-SET = 'NoSQL_HW_ANDREEVDS'
+SET = 'HW_ANDREEVDS_NoSQL'
 
 try:
     client.index_integer_create(NAMESPACE, SET, 'phone', 'ix_phone')
@@ -41,7 +41,7 @@ def add_customer(customer_id, phone_number, lifetime_value):
             'ltv': lifetime_value
         })
         
-        print("Row for customer {0} with phone_number {1} and lifetime_value {2} added successfully!".format(customer_id, phone_number, lifetime_value))
+        #print("Row for customer {0} with phone_number {1} and lifetime_value {2} added successfully!".format(customer_id, phone_number, lifetime_value))
         
     except ex.RecordError as e:
         print("Error: {0} [{1}]".format(e.msg, e.code))
@@ -84,7 +84,7 @@ for i in range(0,1000):
 for i in range(0,1000):
     assert (i + 1 == get_ltv_by_id(i)), "No LTV by ID " + str(i)
     assert (i + 1 == get_ltv_by_phone(i)), "No LTV by phone " + str(i)
-    print("Row with index {0} getted successfully!".format(i))
+    #print("Row with index {0} getted successfully!".format(i))
     
 # Closing connection
 client.close()
