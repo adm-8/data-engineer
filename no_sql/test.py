@@ -20,7 +20,7 @@ except:
   sys.exit(1)
 
 NAMESPACE = 'test'
-TABLE = 'NoSQL_HW'
+TABLE = 'NoSQL_HW_ANDREEVDS'
 
 def make_key(customer_id):
     return (NAMESPACE, TABLE, customer_id)
@@ -57,8 +57,7 @@ def get_ltv_by_id(customer_id):
      
     except ex.RecordError as e:
         print("Error: {0} [{1}]".format(e.msg, e.code))
-        
-
+            
 
 def get_ltv_by_phone(phone_number):
  
