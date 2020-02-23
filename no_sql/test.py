@@ -22,6 +22,7 @@ except:
 NAMESPACE = 'test'
 SET = 'HW_ANDREEVDS_NoSQL'
 
+# we need an index on phone bin to use it in search criteria
 try:
     client.index_integer_create(NAMESPACE, SET, 'phone', 'ix_phone')
 except:
