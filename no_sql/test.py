@@ -24,7 +24,9 @@ SET = 'NoSQL_HW_ANDREEVDS'
 
 try:
     client.index_integer_create(NAMESPACE, SET, 'phone', 'ix_phone')
-
+except:
+    print('Index ix_phone already cereated!')
+    
 def make_key(customer_id):
     return (NAMESPACE, SET, customer_id)
 
