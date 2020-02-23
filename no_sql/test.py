@@ -61,15 +61,13 @@ def get_ltv_by_id(customer_id):
 
 
 def get_ltv_by_phone(phone_number):
-    
+    print(NAMESPACE,' ', TABLE)    
     query = client.query(NAMESPACE, TABLE)
     query.select('phone', 'ltv')
     query.where(p.equals('phone', phone_number))
     records = query.results( {'total_timeout':2000})
+    print(records)
     
-    
-    pp = pprint.PrettyPrinter(indent=2)
-    pp.pprint(records)
     
     for v in store.values():
         if (v['phone'] == phone_number):
@@ -82,7 +80,7 @@ for i in range(0,1000):
         
 for i in range(0,1000):
     assert (i + 1 == get_ltv_by_id(i)), "No LTV by ID " + str(i)
-    #assert (i + 1 == get_ltv_by_phone(i)), "No LTV by phone " + str(i)
+    assert (i + 1 == get_ltv_by_phone(i)), "No LTV by phone " + str(i)
     print("Row with index {0} getted successfully!".format(i))
     
 # Closing connection
