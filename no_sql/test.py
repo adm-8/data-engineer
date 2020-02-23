@@ -3,7 +3,6 @@
 import aerospike
 import logging
 from aerospike import predicates as p
-import pprint
 
 
 # Configure the client
