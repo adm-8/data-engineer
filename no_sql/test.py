@@ -67,7 +67,7 @@ def get_ltv_by_phone(phone_number):
     query.where(p.equals('phone', phone_number))
     result = query.results( {'total_timeout':2000})
     
-    key, metadata, bins = result
+    key, metadata, bins = result[0]
     print(bins)
     #return bins['ltv']
     
